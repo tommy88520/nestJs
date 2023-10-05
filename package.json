@@ -1,9 +1,9 @@
 {
-  "name": "nest-js",
+  "name": "next-js",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port ${PORT-3003}",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -21,6 +21,7 @@
     "eslint-config-next": "13.5.4",
     "eslint-config-prettier": "^9.0.0",
     "prettier": "^3.0.3",
+    "sass": "^1.68.0",
     "stylelint-config-standard-scss": "^11.0.0",
     "typescript": "^5"
   }
