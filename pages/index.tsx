@@ -1,5 +1,7 @@
-import { getFeaturedEvents } from '@/data/api-util';
+import Head from 'next/head';
+import { getFeaturedEvents } from '@/helpers/api-util';
 import EventList from '@/components/events/events-list';
+import NewsletterRegistration from '../components/input/newsletter-registration';
 import fs from 'fs';
 import Link from 'next/link';
 import path from 'path';
@@ -9,14 +11,12 @@ function HomePage(props: any) {
 
   return (
     <div>
+      <Head>
+        <title>NextJS Events</title>
+        <meta name='description' content='Find a lot of great events that allow you to evolve...' />
+      </Head>
+      <NewsletterRegistration />
       <EventList events={featureEvents} />
-      {/* <ul>
-        {products.map((product: any) => (
-          <li key={product.id}>
-            <Link href={`/${product.id}`}>{product.title}</Link>
-          </li>
-        ))}
-      </ul> */}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import Button from '@/components/button/Button';
 import DateIcon from '../icons/date-icon';
 import AddressIcon from '../icons/address-icon';
 import classes from './event-item.module.scss';
+import Image from 'next/image';
 interface EventItemProps {
   event: {
     id: string;
@@ -26,7 +27,8 @@ const EventItem: React.FC<EventItemProps> = ({ event }) => {
   const exploreLink = `/events/${id}`;
   return (
     <li className={classes.item}>
-      <img src={'/' + image} alt={title} />
+      <Image src={'/' + image} alt={title} width={250} height={160} />
+      {/* <img src={'/' + image} alt={title} /> */}
       <div className={classes.content}>
         <div className={classes.summary}>
           <h2>{title}</h2>

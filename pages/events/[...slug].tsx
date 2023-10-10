@@ -1,6 +1,7 @@
+import Head from 'next/head';
 import { Fragment } from 'react';
 import ResultsTitle from '@/components/events/results-title';
-import { getFilteredEvents } from '@/data/api-util';
+import { getFilteredEvents } from '@/helpers/api-util';
 import { useRouter } from 'next/router';
 import EventList from '@/components/events/events-list';
 import Button from '@/components/button/Button';
@@ -9,20 +10,30 @@ function FilteredEventsPage({ filteredEvents, hasError, numYear, numMonth }: any
   // const router = useRouter();
   // const filterData = router.query.slug;
   // console.log(filterData);
-
+  const pageHead = (
+    <Head>
+      <title>NextJS Events</title>
+      <meta name='description' content={`All  events for ${numMonth}/${numYear}`} />
+    </Head>
+  );
   if (!filteredEvents) {
     return (
-      <div className='center'>
-        <ErrorAlert>
-          <p> loading......</p>;
-        </ErrorAlert>
-      </div>
+      <Fragment>
+        {pageHead}
+        <div className='center'>
+          <ErrorAlert>
+            <p> loading......</p>;
+          </ErrorAlert>
+        </div>
+      </Fragment>
     );
   }
 
   if (hasError) {
     return (
       <Fragment>
+        {pageHead}
+
         <ErrorAlert>
           <p>Not a Numberr</p>
         </ErrorAlert>
@@ -36,6 +47,8 @@ function FilteredEventsPage({ filteredEvents, hasError, numYear, numMonth }: any
   if (!filteredEvents || !filteredEvents.length) {
     return (
       <Fragment>
+        {pageHead}
+
         <ErrorAlert>
           <p> No events found for the chosen filter</p>
         </ErrorAlert>
@@ -49,6 +62,8 @@ function FilteredEventsPage({ filteredEvents, hasError, numYear, numMonth }: any
   const date = new Date(numYear, numMonth - 1);
   return (
     <Fragment>
+      {pageHead}
+
       <ResultsTitle date={date} />
       <EventList events={filteredEvents} />
     </Fragment>
@@ -77,7 +92,6 @@ export async function getServerSideProps(context: any) {
     year: numYear,
     month: numMonth,
   });
-  console.log(1, filteredEvents);
 
   return {
     props: { filteredEvents, numYear, numMonth },
